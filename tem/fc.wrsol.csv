@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: GPL-3.0-only
+# Copyright (C) 2026 Daniel Knoop
+# type (r[1-9];w;u),circuit,name,comment,QQ,ZZ,PBSB,ID,FIELD,part (m/s),type / templates,divider / values,unit,comment
+# WRSol (Weishaupt/TEM) Solarregler, RAM lesen 09h 00h: ID = Adresse low, high, Anzahl Bytes (02)
+# Adressen laut "Implementierte eBUS-Befehle der Weishaupt-Geraete" Kap. 11 (WRSol 2.40)
+*r,WRSol,,,,FC,0900,,,,,,,
+r2,,TSO,Speicher oben Temperatur,,,,84F402,_,,SIN,10,°C,
+r2,,TSU,Speicher unten Temperatur,,,,88F402,_,,SIN,10,°C,
+r1,,TKO,Kollektor Temperatur,,,,1CF502,_,,SIN,10,°C,
+r1,,PumpSpeed,Drehzahl Kollektorpumpe 1,,,,30F502,_,,SIN,10,%,
+r3,,PumpSpeedAvg,Mittlere Drehzahl Kollektorpumpe 1,,,,32F502,_,,SIN,10,%,
+r1,,SolarPower,Solare Leistung Kollektor 1,,,,36F502,_,,UIN,,kW,
+r5,,Gewinn1,Solargewinn Kollektor 1,,,,3AF502,_,,UIN,,kWh,
+r5,,GewinnTotLow1,Solargewinn total 0-9999 kWh,,,,3CF502,_,,UIN,,kWh,
+r5,,GewinnTot1,Solargewinn total,,,,3EF502,_,,UIN,10,MWh,
+r9,,PumpHours,Betriebsstunden Kollektorpumpe 1,,,,40F502,_,,SIN,,h,
+r5,,TKOMax,Kollektor Hoechsttemperatur,,,,8AF502,_,,SIN,10,°C,
+r5,,ErrorBits,Fehlerregister,,,,30F402,_,,UIN,,,

@@ -30,7 +30,12 @@ enthalten; sie wurden für diesen Fork nicht neu geprüft.
   `temp0`-Verweise durch das vorhandene Template `_8_Temp0` ersetzt. Die
   betreffenden Herstellerfelder wurden am Gerät nicht neu validiert.
 
-Details: [WTC](docs/wtc.md), [WCM-FB und Betrieb](docs/betrieb.md).
+Details: [WTC](docs/wtc.md), [WCM-FB und Betrieb](docs/betrieb.md),
+[Abgleich mit anderen Forks und validierte Übernahmen](docs/forks.md).
+
+Aus anderen Forks übernommen sind die vollständige Auswahl der Urlaubstage
+(NGallmann) sowie zwei offline geprüfte Prüfbyte-Verfahren (aghulas). Das kleine
+[Prüfwerkzeug](tools/weishaupt_crc.py) hat keinen Geräte- oder Netzwerkzugriff.
 
 ## Sicherheit und Grenzen
 
@@ -107,8 +112,10 @@ Die ursprünglichen Weishaupt-Definitionen und ihre Git-Historie stammen von
 Deren Hinweise und Dokumentation bleiben erhalten; die bisherige README liegt
 unter [docs/upstream-readme.md](docs/upstream-readme.md).
 
-Die neuen Definitionen und die Dokumentation dieses Forks stammen von Daniel Knoop
-(2026) und werden ebenfalls unter **GNU GPL Version 3** veröffentlicht. Der
+Die eigenen Ergänzungen und die Dokumentation dieses Forks stammen von Daniel Knoop
+(2026). Beiträge und Erkenntnisse von NGallmann und aghulas sind mit Herkunft und
+Validierungsumfang in [docs/forks.md](docs/forks.md) benannt. Diese Ergänzungen
+werden ebenfalls unter **GNU GPL Version 3** veröffentlicht. Der
 ursprüngliche [Lizenztext](LICENSE) bleibt unverändert. Bestehende Urheberhinweise
 bleiben bestehen. Es besteht keine Verbindung zum Gerätehersteller.
 

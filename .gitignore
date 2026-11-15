@@ -8,3 +8,7 @@ ebusd.eu/
 /_templates.csv
 /broadcast.csv
 /memory.csv
+
+# Lokale Python-Artefakte
+__pycache__/
+*.py[cod]

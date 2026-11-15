@@ -72,3 +72,14 @@ I40 ist ein rückstellbarer Zähler mit einem Anzeigebereich von 0 bis 999 und
 kein unbegrenzt wachsender Gesamtzähler. Überlauf und manuelle Rückstellung
 müssen bei Differenzen berücksichtigt werden. I41 ist auf ein Byte begrenzt.
 I42/I43 (Gesamtzähler am Gerät) werden hier nicht dekodiert.
+
+## Prüfbytes: inzwischen mit historischen Daten bestätigt
+
+Die von aghulas beschriebenen Rechenverfahren passen auch zu den vorhandenen
+WTC-15-Aufzeichnungen: Telegramm-CRC (Polynom `0x5C`) und ein davon verschiedenes
+Prüfbyte des Fachmannblocks (Schiebeverfahren mit `0x21`, abschließend komplementiert).
+Der Fachmannblock `0x17–0x3B` samt Prüfbyte an `0x3C` stimmt in allen fünf
+historischen Vergleichsfällen überein. Der Fremdfork hat andere Blockgrenzen;
+diese werden nicht übernommen. Quellen, Belege, Grenzen und Offline-Werkzeug:
+[Abgleich mit anderen Forks](forks.md). Die Erkenntnis ermöglicht keine
+Freigabe von Speicher-Schreibzugriffen.

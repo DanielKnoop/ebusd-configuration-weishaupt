@@ -21,14 +21,27 @@ Schreibbefehle nicht unbeabsichtigt über MQTT oder Automationen freigeben.
 Das Gerät besitzt im erprobten Aufbau keine Gangreserve und verliert bei
 Stromausfall seine Uhrzeit. Ein fremder Zeit-Broadcast hat die Uhr nicht gestellt.
 
-## Zeitprogramme: bestehende Definitionen
+## Zeitprogramme: WCM-FB richtig beschriftet
 
-Die vorhandenen Timer-Definitionen des Ursprungsprojekts bleiben unverändert.
-Im erprobten WCM-FB enthält das Telegramm die Reihenfolge **Ende, Start** in
-Viertelstunden (z. B. 0x51 = 20:15); `80 80` bezeichnet ein leeres Fenster.
-Die bisherigen Templates zeigen Start/Ende deshalb vertauscht an. Vor einem
-Schreibzugriff unbedingt am Display abgleichen. Dieser Fork enthält dafür noch
-keine allgemeine Korrektur für alle unterstützten Geräte.
+Im erprobten WCM-FB SW 9634 enthält das Telegramm die Reihenfolge **Ende, Start**
+in Viertelstunden; `80 80` bezeichnet ein leeres Fenster. Dies ist anhand der
+früheren Displayprüfung und erneut durch den Abgleich von ebusd mit einer
+getrennten Rohdaten-Auslesung bestätigt.
+
+Für Adresse `35` bindet dieser Fork deshalb `hc1.timer.inc` (Heizprogramme)
+und `hc1.hwc.timer.inc` (Warmwasser) ein. Das erste Feld heißt nun korrekt
+`End`, das zweite `Start`. **Die Reihenfolge auf dem Bus bleibt unverändert.**
+Beim Lesen mit ausführlicher Ausgabe (`ebusctl read -v -c hc1 HP1.Mo.1`)
+ist die Zuordnung sichtbar. Schreibwerte wären weiterhin in physischer
+Reihenfolge Ende;Start anzugeben; ein Geräte-Schreibtest wurde dafür nicht ausgeführt.
+
+Diese beiden Dateien sind aus den ursprünglichen Timer-Includes abgeleitet;
+Nachrichtennamen, IDs, Typ `TTQ` und Polling bleiben erhalten. Andere
+Heizkreisgeräte nutzen die unveränderten ursprünglichen Includes. Auch das
+Zirkulationsprogramm bleibt unverändert, da es am erprobten Aufbau nicht genutzt wird.
+Vorhandene Anwendungen, die die alte vertauschte Feldbenennung selbst korrigieren,
+müssen die nun richtigen Namen beachten. Die getrennte HA-Rohdaten-Auslesung
+ist von dieser Beschriftungskorrektur nicht betroffen.
 
 ## Sparsames Polling
 

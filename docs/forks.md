@@ -74,15 +74,15 @@ Die Tests umfassen bekannte kurze und verkettete Telegramme, alle 256 Adressen
 für sechs dokumentierte Kurzabfrage-Schlüssel, synthetische Blockprüfungen und
 die gepflegten 5000-Lesedefinitionen. Rohdaten privater Anlagen sind nicht nötig.
 
-## Bestätigte Erkenntnis, bestehende Definitionen noch unverändert
+## Bestätigte Erkenntnis: Zeitprogramm-Beschriftung für das WCM-FB korrigiert
 
 Die [Reglernotizen von aghulas](https://github.com/aghulas/ebusd-configuration-weishaupt/blob/b9f0accf4980a8fa74bec661dbccff09c7daa60a/catalog/README.md)
 beschreiben Zeitfenster ebenfalls als **Ende, Start** in Viertelstunden,
 mit `80 80` für ein leeres Fenster. Das stimmt mit den vorhandenen WCM-FB-
-Aufzeichnungen und dem früheren Displayabgleich überein. Die bisherigen
-Timer-Templates sind weiterhin vertauscht beschriftet (siehe [Betrieb](betrieb.md)).
-Eine Korrektur wird hier noch nicht auf alle unterstützten Regler ausgedehnt;
-die ursprünglichen Includes werden auch für andere Geräte verwendet.
+Aufzeichnungen und dem früheren Displayabgleich überein. Nach erneutem Live-Abgleich sind die Feldnamen für Heiz- und Warmwasserprogramme
+des WCM-FB an Adresse 35 korrigiert (siehe [Betrieb](betrieb.md)).
+Die ursprünglichen Includes für andere Geräte und das ungenutzte
+Zirkulationsprogramm bleiben unverändert.
 
 ## Nicht übernommen: anderes WTC-Speicherlayout und Reglerfamilien
 
@@ -95,7 +95,11 @@ ist nicht belegt. Auch Skalierungen von Leistungswerten unterscheiden sich.
 - **Fehlerhistorie:** `wtc.history.inc` beschreibt sechs Plätze ab EEPROM
   `0x0202` und Fehlerzähler ab `0x0196`. Der vorhandene WTC-15-Dump enthält nur
   die kurze Bank-2-Adressierung im Bereich `0x00–0xFF`; diese Ziele sind damit
-  nicht abgedeckt. Kein Nachweis für unsere Firmware, keine Übernahme oder Abfrage.
+  nicht abgedeckt. Beim anschließenden Live-Abgleich lieferte eine einzelne
+  Leseabfrage des EEPROM-Zeigers `0x0200` an f6 keine Antwort; auch die kurze
+  EEPROM-Abfrage am zweiten Busteilnehmer 08 blieb ohne Antwort. Deshalb
+  wurde nicht weiter abgefragt und die fremde Fehlerhistorie nicht übernommen.
+  Einzelne Timeouts beweisen keine grundsätzliche Inkompatibilität.
 - **Regler und Uhr:** KA/EM/FS-Definitionen und Schreiben von Adresse `ff`
   betreffen die dortige Anlage. Am WCM-FB SW 9634 ist Absender `00` erprobt.
   Auch das Übernehmen fremder Zeit-Broadcasts unterscheidet sich.
@@ -129,3 +133,18 @@ WCM-FB lädt 291 Nachrichten, WTC f6 lädt 23 und WRSol lädt 13, jeweils Status
 Die Gesamtprüfung ohne die alte Adresse-08-Definition besteht ebenfalls
 (3312 Nachrichten einschließlich Hersteller-Aliasdateien). Die bekannte
 Einschränkung der Gesamtprüfung mit Adresse 08 bleibt bestehen.
+
+## Nachtrag: Live-Abgleich und gezielte Übernahme
+
+Am 15.11.2026 wurden die erprobten Geräte erneut live identifiziert: WTC an f6,
+SW 0306 / HW 0301, WCM-FB an 35 mit SW 9634 und WRSol an fc mit SW 2422.
+Der gelesene Urlaubstag passt zur ergänzten Auswahl-Liste. Bei Heiz- und
+Warmwasserprogrammen bestätigt der Abgleich mit einer unabhängigen
+Rohdaten-Auslesung die Busreihenfolge Ende, Start. Die entsprechenden Feldnamen
+sind nun nur für das WCM-FB richtig zugeordnet; andere Timer-Includes bleiben erhalten.
+
+Ausgerollt wurden die Urlaubstag-Liste und die zwei WCM-FB-Timer-Includes samt
+Zuordnung in der Gerätedatei. Die Prüfung auf einer Kopie der tatsächlichen
+Konfiguration bestand vor dem Ausrollen (3288 Nachrichten einschließlich
+Hersteller-Aliasdateien; WCM-FB-Einzelscan 291 Nachrichten). Vor dem Überschreiben
+wurden Sicherungen angelegt. Weder Parameter noch Zeitfenster wurden geschrieben.

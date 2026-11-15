@@ -8,7 +8,7 @@ keine Firmware und keine vollständige Home-Assistant-Konfiguration.
 
 | Gerät | Busadresse | Definition | Erprobung |
 |---|---|---|---|
-| Weishaupt WTC 15-A, Ausführung W | f1 / f6 | `weishaupt/f6..sc.csv` | Status, Fachmannparameter und I40/I41 |
+| Weishaupt WTC 15-A, Ausführung W, SW 0306 / HW 0301 | f1 / f6 | `weishaupt/f6..sc.csv` | Status, Fachmannparameter und I40/I41 |
 | Raumgerät WCM-FB, Identifikation Kromschröder „W“, SW 9634 | 30 / 35 | `weishaupt/35..hc1.csv` | Sollwerte, Uhr, ausgewählte Parameter |
 | WRSol, Herstellerkennung TEM, SW 2422 | f7 / fc | `tem/fc.wrsol.csv` | Temperatur- und Prozesswerte; Einschränkungen unten |
 
@@ -24,7 +24,8 @@ enthalten; sie wurden für diesen Fork nicht neu geprüft.
   und dokumentierten Umrechnungen.
 - WTC-Zähler I40/I41: Brennerstarts und Brennerstunden seit Rückstellung.
 - WCM-FB: passives Dekodieren der Sollwerttelegramme und des Zeit-Broadcasts,
-  Lesen und Stellen der Uhr, gezielte Poll-Prioritäten ausgewählter Werte.
+  Lesen und Stellen der Uhr, gezielte Poll-Prioritäten ausgewählter Werte sowie
+  korrekt beschriftete End-/Startfelder der Heiz- und Warmwasserprogramme.
 - WRSol: Definitionen für Temperaturen, Pumpendrehzahl, Solarertrag und Fehlerregister.
 - Bestehender Parserfehler in `sc.manufacturer.inc`: drei nicht definierte
   `temp0`-Verweise durch das vorhandene Template `_8_Temp0` ersetzt. Die
